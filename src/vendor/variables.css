@@ -1,0 +1,13 @@
+:root {
+  --black: #000;
+  --white: #fff;
+  --dark: #202020;
+  --darkgray: #272727;
+  --gray:  #313131;
+  --lightgray: #8B8B8B;
+  --horizontal-line: #DADADA;
+  --green: #3DDC84;
+  --blue: #073042;
+  --ligtblue: #0F4157;
+  --transparent: rgba(0, 0, 0, 0);
+}
