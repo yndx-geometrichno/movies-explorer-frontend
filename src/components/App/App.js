@@ -1,27 +1,34 @@
-import './App.css';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer'
+import "./App.css";
+import { AppContext } from "../../contexts/AppContext";
+import Main from "../Main/Main";
+import Login from "../Login/Login";
+import Register from "../Register/Register";
+import { Route, Routes } from "react-router-dom";
+import { useState, useEffect } from "react";
+import SavedMovies from "../SavedMovies/SavedMovies";
+import Movies from "../Movies/Movies";
+import Profile from "../Profile/Profile";
+import PageNotFound from "../PageNotFound/PageNotFound";
 
 function App() {
+  const [isLoggedIn, setLoggedIn] = useState(true);
+
   return (
-    <div className="App">
-    <Header />
-      <header className="App-header">
-        <img className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <Footer />
-    </div>
+    <AppContext.Provider value={{ isLoggedIn }}>
+      <div className="page">
+        <div className="page__container">
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/signin" element={<Login />} />
+            <Route path="/signup" element={<Register />} />
+            <Route path="/movies" element={<Movies />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/saved-movies" element={<SavedMovies />} />
+            <Route path="/*" element={<PageNotFound />} />
+          </Routes>
+        </div>
+      </div>
+    </AppContext.Provider>
   );
 }
 
