@@ -1,0 +1,147 @@
+.project {
+  width: 100%;
+  background-color: var(--dark);
+}
+
+.project__container {
+  padding: 110px 70px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.project__header {
+  margin: 0;
+  width: 100%;
+  padding-bottom: 23px;
+  margin-bottom: 70px;
+  border-bottom: 1px solid var(--horizontal-line);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.88px;
+}
+
+.project__about-container {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 40px;
+  margin-bottom: 110px;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.project__about-item {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 26px;
+}
+
+.project__about-item_subheader {
+  padding: 0;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.8px;
+}
+
+.project__about-item_content {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.43;
+}
+
+.project__progress-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+}
+
+.project__progress-bar {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+}
+
+.project__progress-container_one-week {
+  width: 20%;
+}
+
+.project__progress-bar_one-week {
+  background-color: var(--green);
+  color: var(--black);
+}
+
+.project__progress-container_four-week {
+  width: 80%;
+}
+
+.project__progress-bar_four-week {
+  background-color: #303030;
+}
+
+.project__progress-caption_text {
+  color: var(--lightgray);
+  padding-top: 14px;
+  text-align: center;
+  line-height: 1.21;
+}
+
+@media screen and (max-width: 800px) {
+  .project__container {
+    padding: 90px 50px;
+  }
+  .project__about-item {
+    width: 320px;
+  }
+  .project__about-item_content {
+    font-size: 12px;
+  }
+  .project__progress-caption_text {
+    padding-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .project__container {
+    padding: 70px 18px;
+    gap: 60px;
+  }
+  .project__header {
+    font-size: 18px;
+    width: 100%;
+    margin-bottom: 0;
+  }
+  .project__about-container {
+    flex-direction: column;
+    gap: 56px;
+    margin-bottom: 0;
+  }
+  .project__about-item {
+    width: 284px;
+    gap: 16px;
+  }
+  .project__progress-container {
+    font-size: 11px;
+    width: 284px;
+  }
+  .project__about-item_subheader {
+    font-size: 18px;
+    padding: 0;
+  }
+  .project__progress-container_one-week {
+    width: 100px;
+  }
+  .project__progress-container_four-week {
+    width: 184px;
+  }
+
+}
