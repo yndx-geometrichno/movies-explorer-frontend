@@ -1,3 +1,15 @@
+.sign {
+  letter-spacing: normal;
+  flex-grow: 1;
+  padding-bottom: 40px;
+}
+
+.sign__container {
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
+}
+
 .sign__logo {
   margin-top: 70px;
   width: 38px;
@@ -6,9 +18,13 @@
   background-image: url("../../images/logo.svg");
 }
 
+.sign__logo:hover {
+  opacity: 0.8;
+}
+
 .sign__link-container {
   color: #8b8b8b;
-  margin: 16px 0 0;
+  margin: 16px auto 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -29,6 +45,7 @@
 .sign__header {
   margin: 40px 0;
   font-size: 24px;
+  font-weight: normal;
   line-height: 29px;
 }
 
@@ -56,7 +73,7 @@
 }
 
 .sign__form-input:focus {
-  outline: none;
+  outline: solid var(--brightblue);
 }
 
 .sign__form-input_type_error {
@@ -89,70 +106,76 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 }
 
 .sign {
   max-width: 396px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
-.sign__container {
+.sign__fields-container, .sign__actions-container {
+  display: flex;
+  height: 100%;
   width: 396px;
   display: flex;
   flex-direction: column;
-  align-items: left;
+  align-items: flex-start;
   justify-content: center;
 }
 
+.sign__fields-container {
+  height: 483px;
+}
+
 .sign__button {
+  width: 100%;
+  max-height: 45px;
+  height: 45px;
+  margin-top: 69px;
   background-color: var(--brightblue);
   color: var(--white);
   padding: 0;
-  height: 45px;
   border-radius: 3px;
   border: none;
   font-size: 14px;
   font-weight: 400;
   line-height: normal;
-}
-
-.form_type_login .sign__button {
-  margin-top: 157px;
-}
-
-.form_type_register .sign__button {
-  margin-top: 69px;
+  flex-grow: 1;
 }
 
 .sign__button:hover {
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: var(--brightblue);
+  opacity: 0.8;
   cursor: pointer;
 }
 
 @media screen and (max-width: 500px) {
   .sign__header {
     margin: 40px 0;
-    font-size: 20px;
     line-height: normal;
   }
 }
 
 @media screen and (max-width: 500px) {
-  .sign__container {
+  .sign__fields-container, .sign__actions-container {
     width: 260px;
+    flex-grow: 1;
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   .sign__button {
-    height: 46px;
+    max-height: 46px;
     font-size: 16px;
     line-height: normal;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .sign__container {
+  .sign__fields-container, .sign__actions-container {
     align-items: center;
   }
   .sign__header {

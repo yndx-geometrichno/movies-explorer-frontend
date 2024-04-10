@@ -42,7 +42,7 @@
   opacity: 0.7;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   .footer {
     padding: 79px 30px 20px;
   }
@@ -53,8 +53,13 @@
     padding: 79px 10px 20px;
     font-size: 12px;
   }
+  .footer__description {
+    letter-spacing: normal;
+    height: 15px;
+    padding-bottom: 21px;
+  }
   .footer__container {
-    padding-top: 30px;
+    padding-top: 31px;
     flex-direction: column-reverse;
   }
   .footer__links {
@@ -63,8 +68,14 @@
     align-items: center;
     gap: 12px;
     padding-bottom: 30px;
+    letter-spacing: normal;
+  }
+  .footer__link {
+    height: 15px;
   }
   .footer__year {
     color: #8b8b8b;
+    letter-spacing: normal;
+    height: 15px;
   }
 }

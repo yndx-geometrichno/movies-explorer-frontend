@@ -40,6 +40,7 @@ function Navigation() {
       {isLoggedIn &&
         (isMobileWidth ? (
           <button
+            type="button"
             className="navigation__menu-btn"
             onClick={handleMenuBtnClick}
           ></button>
@@ -74,10 +75,10 @@ function Navigation() {
           )
         ) : (
           <div className="navigation__profile-auth">
-            <Link to={"/signup"} className="navigation__profile-button_signup">
+            <Link to={"/signup"} className="navigation__profile-btn-signup">
               Регистрация
             </Link>
-            <Link to={"/signin"} className="navigation__profile-button_signin">
+            <Link to={"/signin"} className="navigation__profile-btn-signin">
               Войти
             </Link>
           </div>
@@ -123,6 +124,7 @@ function Navigation() {
             <div className="navigation__profile-picture"></div>
           </Link>
           <button
+            type="button"
             className="navigation__close-menu-btn"
             onClick={handleMenuBtnClick}
           ></button>

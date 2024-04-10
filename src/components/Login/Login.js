@@ -12,23 +12,25 @@ function Login({ onLogin }) {
   }
 
   return (
-    <SignForm
-      header="Рады видеть!"
-      email={email}
-      password={password}
-      onSubmit={handleSubmit}
-      setEmail={setEmail}
-      setPassword={setPassword}
-      buttonText="Войти"
-      formType="form_type_login"
-    >
-      <p className="sign__link-container">
-        Еще не зарегистрированы?
-        <Link to="/signup" className="sign__link">
-          Регистрация
-        </Link>
-      </p>
-    </SignForm>
+    <main className="page__container">
+      <SignForm
+        header="Рады видеть!"
+        email={email}
+        password={password}
+        onSubmit={handleSubmit}
+        setEmail={setEmail}
+        setPassword={setPassword}
+        buttonText="Войти"
+        formType="form_type_login"
+      >
+        <p className="sign__link-container">
+          Еще не зарегистрированы?
+          <Link to="/signup" className="sign__link">
+            Регистрация
+          </Link>
+        </p>
+      </SignForm>
+    </main>
   );
 }
 

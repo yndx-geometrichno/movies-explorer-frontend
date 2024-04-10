@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-const movies = [
+const initialMovies = [
   {
     movie: {
       name: "movie",
@@ -11,6 +11,7 @@ const movies = [
     },
     owner: "owner",
     likes: ["owner", "owner2"],
+    id: 1,
   },
   {
     movie: {
@@ -20,6 +21,7 @@ const movies = [
     },
     owner: "owner",
     likes: ["owner", "owner2"],
+    id: 2,
   },
   {
     movie: {
@@ -29,6 +31,7 @@ const movies = [
     },
     owner: "owner",
     likes: ["owner", "owner2"],
+    id: 3,
   },
   {
     movie: {
@@ -38,6 +41,7 @@ const movies = [
     },
     owner: "owner",
     likes: ["owner", "owner2"],
+    id: 4,
   },
   {
     movie: {
@@ -47,6 +51,7 @@ const movies = [
     },
     owner: "owner",
     likes: ["owner", "owner2"],
+    id: 5,
   },
   {
     movie: {
@@ -56,6 +61,7 @@ const movies = [
     },
     owner: "owner",
     likes: ["owner", "owner2"],
+    id: 6,
   },
   {
     movie: {
@@ -65,6 +71,7 @@ const movies = [
     },
     owner: "owner",
     likes: ["owner", "owner2"],
+    id: 7,
   },
   {
     movie: {
@@ -74,6 +81,7 @@ const movies = [
     },
     owner: "owner",
     likes: ["owner", "owner2"],
+    id: 9,
   },
   {
     movie: {
@@ -83,6 +91,7 @@ const movies = [
     },
     owner: "owner",
     likes: ["owner", "owner2"],
+    id: 10,
   },
   {
     movie: {
@@ -92,6 +101,7 @@ const movies = [
     },
     owner: "owner",
     likes: ["owner", "owner2"],
+    id: 11,
   },
   {
     movie: {
@@ -101,6 +111,7 @@ const movies = [
     },
     owner: "owner",
     likes: ["owner", "owner2"],
+    id: 12,
   },
   {
     movie: {
@@ -110,6 +121,7 @@ const movies = [
     },
     owner: "owner",
     likes: ["owner", "owner2"],
+    id: 13,
   },
   {
     movie: {
@@ -119,24 +131,47 @@ const movies = [
     },
     owner: "owner",
     likes: ["owner", "owner2"],
+    id: 14,
   },
 ];
-function MoviesCardList() {
+function MoviesCardList(props) {
+  const [movies, setMovies] = useState([]);
+  const [isButtonVisible, setButtonVisible] = useState(true)
+
+  let moviesPerPage = 24;
+  if (window.innerWidth < 1280) {
+    console.log(window.innerWidth);
+    moviesPerPage = 8;
+  } else if (window.innerWidth < 768) {
+    console.log(window.innerWidth);
+    moviesPerPage = 5;
+  }
+
+  useEffect(() => {
+    const number = initialMovies.length / 5;
+    const movieStack = initialMovies.slice(0, 5)
+    setMovies(movieStack);
+  }, []);
+
   return (
     <section className="movies">
       <div className="movies__container">
-        {movies.map((movie) => {
+        {movies.map((item) => {
+          const { movie, owner, id } = item;
           return (
             <MoviesCard
-              movie={movie.movie}
-              owner={movie.owner}
-              name={movie.movie.name}
-              link={movie.movie.link}
-              length={movie.movie.length}
+              key={id}
+              movie={movie}
+              owner={owner}
+              name={movie.name}
+              link={movie.link}
+              length={movie.length}
+              {...props}
             />
           );
         })}
       </div>
+        <button type="button" className={`movies__load-more-btn ${isButtonVisible ? "movies__load-more-btn_visible" : ""}`}>Ещё</button>
     </section>
   );
 }

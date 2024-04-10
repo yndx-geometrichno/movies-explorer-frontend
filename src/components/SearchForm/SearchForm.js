@@ -12,7 +12,7 @@ function SearchForm() {
           className="search__input"
           placeholder="Фильм"
         ></input>
-        <button className="search__submit"></button>
+        <button type="submit" className="search__submit"></button>
       </div>
       <div className="search__checkbox-container">
         <input
@@ -21,7 +21,7 @@ function SearchForm() {
           type="checkbox"
           className="search__checkbox"
         />
-        <label for="shortfilms" className="search__checkbox-label">
+        <label htmlFor="shortfilms" className="search__checkbox-label">
           Короткометражки
         </label>
       </div>

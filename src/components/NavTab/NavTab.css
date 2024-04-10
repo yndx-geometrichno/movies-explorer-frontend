@@ -28,8 +28,10 @@
 @media screen and (max-width: 767px) {
   .navtab {
     gap: 24px;
+    letter-spacing: normal;
   }
   .navtab__item {
     font-size: 11px;
+    height: 16px;
   }
 }

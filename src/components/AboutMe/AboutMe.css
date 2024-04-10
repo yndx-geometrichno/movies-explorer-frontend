@@ -18,6 +18,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .aboutme__profile-name {
@@ -64,9 +65,12 @@
   border-radius: 10px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   .aboutme {
     padding: 90px 50px;
+  }
+  .aboutme__profile {
+    gap: 0;
   }
   .aboutme__profile-name {
     font-size: 40px;
@@ -93,8 +97,9 @@
     padding: 70px 14px;
   }
   .aboutme__header {
+    height: 22px;
+    padding-bottom: 28px;
     font-size: 18px;
-    padding-bottom: 18px;
   }
   .aboutme__profile {
     flex-direction: column-reverse;
@@ -110,17 +115,30 @@
     flex-direction: column;
     gap: 20px;
     font-size: 11px;
+    margin: 0 auto;
   }
   .aboutme__profile-name {
-    font-size: 30px
+    height: 36px;
+    font-size: 30px;
+    letter-spacing: -.045em;
   }
   .aboutme__profile-subheader {
+    height: 16px;
+    line-height: 16px;
     padding: 0;
     font-size: 11px;
+    letter-spacing: normal;
   }
   .aboutme__profile-description {
+    max-height: 112px;
     font-size: 11px;
     line-height: 16px;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
+    letter-spacing: normal;
+  }
+  .aboutme__profile-github {
+    height: 17px;
+    letter-spacing: normal;
+    font-weight: 400;
   }
 }

@@ -3,7 +3,7 @@ import "./Footer.css";
 import { Link } from "react-router-dom";
 
 function Footer() {
-  const yandexLink = { pathname: "http://praktikum.yandex.ru/" };
+  const yandexLink = { pathname: "https://praktikum.yandex.ru/" };
   const githubLink = {
     pathname: "https://github.com/yndx-geometrichno",
   };

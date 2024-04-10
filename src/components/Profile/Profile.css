@@ -4,12 +4,13 @@
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
+  letter-spacing: normal;
+  padding-bottom: 40px;
 }
 
 .profile__header {
   margin: 0;
   padding: 74px 0 123px;
-  /* text-align: center; */
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
@@ -64,7 +65,6 @@
 .profile__btn {
   background-color: transparent;
   border: none;
-  font-family: Inter;
   font-size: 13px;
   font-style: normal;
   line-height: normal;
@@ -105,6 +105,8 @@
   .profile {
     padding: 70px 30px 40px;
     width: unset;
+    height: 100%;
+    flex-grow: 1;
   }
   .profile__header {
     padding: 0;
@@ -114,7 +116,10 @@
     width: 100%;
   }
   .profile__btn-container {
+    margin: 0;
+    flex-grow: 1;
     gap: 16px;
+    justify-content: flex-end;
   }
   .profile__btn {
     font-size: 12px;

@@ -3,8 +3,8 @@ import "./Promo.css";
 
 function Promo() {
   return (
-    <section className="content__lead">
-      <h1 className="content__lead_header">
+    <section className="lead">
+      <h1 className="lead__header">
         Учебный проект студента факультета Веб-разработки.
       </h1>
     </section>

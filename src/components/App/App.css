@@ -13,3 +13,8 @@
   flex-direction: column;
 }
 
+@media screen and (max-width: 767px) {
+  .page {
+    letter-spacing: -.038em;
+  }
+}

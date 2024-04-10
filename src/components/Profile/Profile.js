@@ -25,6 +25,7 @@ function Profile() {
           <input
             type="text"
             className="profile__data profile__data-user"
+            placeholder="Имя"
             value={userName}
             disabled={inputStatus === true ? "" : "disabled"}
             onChange={(e) => setUserName(e.target.value)}
@@ -35,6 +36,7 @@ function Profile() {
           <input
             type="text"
             className="profile__data profile__data-user"
+            placeholder="Email"
             value={userEmail}
             disabled={inputStatus === true ? "" : "disabled"}
             onChange={(e) => setUserEmail(e.target.value)}
@@ -55,6 +57,7 @@ function Profile() {
           ) : (
             <>
               <button
+                type="button"
                 className="profile__edit-btn profile__btn"
                 onClick={(e) => {
                   e.preventDefault();
@@ -63,7 +66,10 @@ function Profile() {
               >
                 Редактировать
               </button>
-              <button className="profile__logout-btn profile__btn">
+              <button
+                type="button"
+                className="profile__logout-btn profile__btn"
+              >
                 Выйти из аккаунта
               </button>
             </>

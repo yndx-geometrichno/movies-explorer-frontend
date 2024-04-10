@@ -13,25 +13,27 @@ function Register({ onRegister }) {
   }
 
   return (
-    <SignForm
-      header="Добро пожаловать!"
-      email={email}
-      name={name}
-      password={password}
-      onSubmit={handleSubmit}
-      setName={setName}
-      setEmail={setEmail}
-      setPassword={setPassword}
-      buttonText="Зарегистрироваться"
-      formType="form_type_register"
-    >
-      <p className="sign__link-container">
-        Уже зарегистрированы?
-        <Link to="/signin" className="sign__link">
-          Войти
-        </Link>
-      </p>
-    </SignForm>
+    <main className="page__container">
+      <SignForm
+        header="Добро пожаловать!"
+        email={email}
+        name={name}
+        password={password}
+        onSubmit={handleSubmit}
+        setName={setName}
+        setEmail={setEmail}
+        setPassword={setPassword}
+        buttonText="Зарегистрироваться"
+        formType="form_type_register"
+      >
+        <p className="sign__link-container">
+          Уже зарегистрированы?
+          <Link to="/signin" className="sign__link">
+            Войти
+          </Link>
+        </p>
+      </SignForm>
+    </main>
   );
 }
 
