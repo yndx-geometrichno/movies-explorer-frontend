@@ -101,19 +101,25 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 500px) {
   .profile {
+    margin: 0;
     padding: 70px 30px 40px;
     width: unset;
     height: 100%;
     flex-grow: 1;
   }
   .profile__header {
+    font-size: 24px;
     padding: 0;
     padding-bottom: 80px;
   }
   .profile__data-container {
     width: 100%;
+  }
+  .profile__data {
+    height: 14px;
+    padding: 0;
   }
   .profile__btn-container {
     margin: 0;

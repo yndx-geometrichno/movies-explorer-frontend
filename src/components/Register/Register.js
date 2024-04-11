@@ -24,7 +24,7 @@ function Register({ onRegister }) {
         setEmail={setEmail}
         setPassword={setPassword}
         buttonText="Зарегистрироваться"
-        formType="form_type_register"
+        formType="form__register"
       >
         <p className="sign__link-container">
           Уже зарегистрированы?

@@ -1,6 +1,6 @@
 .aboutme {
   background-color: var(--dark);
-  padding: 110px 70px;
+  padding: 110px 70px 100px;
 }
 
 .aboutme__header {
@@ -39,6 +39,7 @@
 
 .aboutme__profile-description {
   margin: 0;
+  height: 88px;
   padding-bottom: 99px;
   max-width: 600px;
   font-size: 14px;

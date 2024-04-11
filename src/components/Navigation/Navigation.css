@@ -79,21 +79,32 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;
+  cursor: pointer;
+}
+
+.navigation__close-menu-btn:hover {
+  opacity: 0.8;
 }
 
 .navigation__menu-btn {
   background-image: url("../../images/menu-btn.svg");
   background-color: transparent;
   border: none;
-  max-width: 44px;
-  width: 100%;
-  height: 43px;
+  width: 21px;
+  height: 24px;
   flex-grow: 0;
   box-sizing: border-box;
   text-decoration: none;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100%;
+  background-size: 44px 40px;
+  margin-right: 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.navigation__menu-btn:hover {
+  opacity: 0.8;
 }
 
 .navigation__profile {

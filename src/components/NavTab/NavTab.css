@@ -19,6 +19,7 @@
 
 .navtab__link {
   color: inherit;
+  letter-spacing: 0.009em;
 }
 
 .navtab__link:hover {
@@ -33,5 +34,8 @@
   .navtab__item {
     font-size: 11px;
     height: 16px;
+  }
+  .navtab__link {
+    letter-spacing: normal;
   }
 }

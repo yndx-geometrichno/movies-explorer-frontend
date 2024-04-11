@@ -1,7 +1,11 @@
 .sign {
   letter-spacing: normal;
   flex-grow: 1;
-  padding-bottom: 40px;
+  padding-bottom: 70px;
+  max-width: 396px;
+  margin: 70px auto 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .sign__container {
@@ -11,7 +15,6 @@
 }
 
 .sign__logo {
-  margin-top: 70px;
   width: 38px;
   height: 38px;
   text-decoration: none;
@@ -109,13 +112,6 @@
   flex-grow: 1;
 }
 
-.sign {
-  max-width: 396px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-}
-
 .sign__fields-container, .sign__actions-container {
   display: flex;
   height: 100%;
@@ -152,20 +148,6 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 500px) {
-  .sign__header {
-    margin: 40px 0;
-    line-height: normal;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .sign__fields-container, .sign__actions-container {
-    width: 260px;
-    flex-grow: 1;
-  }
-}
-
 @media screen and (max-width: 900px) {
   .sign__button {
     max-height: 46px;
@@ -175,16 +157,33 @@
 }
 
 @media screen and (max-width: 767px) {
-  .sign__fields-container, .sign__actions-container {
-    align-items: center;
+  .sign {
+    padding-bottom: 30px;
   }
   .sign__header {
-    margin: 50px 0 80px;
+    margin: 40px 0;
+    line-height: normal;
+  }
+  .sign__fields-container {
+    height: 463px;
+  }
+  .sign__fields-container, .sign__actions-container {
+    width: 260px;
+    flex-grow: 1;
+    align-items: center;
+  }
+  .sign__form-input {
+    text-indent: .08em;
   }
   .sign__link-container {
     font-size: 12px;
+    margin-top: 14px;
     justify-content: space-between;
     gap: 7px;
+  }
+  .sign__button {
+    font-size: 12px;
+    max-height: 45px;
   }
 }
 

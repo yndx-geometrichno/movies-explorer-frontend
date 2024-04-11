@@ -21,7 +21,7 @@ function Navigation() {
   }, []);
 
   useEffect(() => {
-    if (screenWidth <= 800) {
+    if (screenWidth < 901) {
       setMobileWidth(true);
     } else {
       setMobileWidth(false);

@@ -21,7 +21,7 @@ function Login({ onLogin }) {
         setEmail={setEmail}
         setPassword={setPassword}
         buttonText="Войти"
-        formType="form_type_login"
+        formType="form__login"
       >
         <p className="sign__link-container">
           Еще не зарегистрированы?

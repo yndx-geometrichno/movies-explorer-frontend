@@ -21,7 +21,7 @@ function SignForm({
         <Link to={"/"} className="sign__logo"></Link>
         <h2 className="sign__header">{header}</h2>
         <form className={`sign__form ${formType}`} onSubmit={onSubmit}>
-          {formType === "form_type_register" && (
+          {formType === "form__register" && (
             <>
               <label className="sign__form-label" for="name">
                 Имя

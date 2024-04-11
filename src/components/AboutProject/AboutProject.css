@@ -24,10 +24,10 @@
 }
 
 .project__about-container {
+  width: 100%;
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 40px;
   margin-bottom: 110px;
   justify-content: space-between;
   flex-direction: row;
@@ -43,6 +43,7 @@
 }
 
 .project__about-item-subheader {
+  height: 48px;
   padding: 0;
   margin: 0;
   font-size: 20px;
@@ -72,7 +73,7 @@
 }
 
 .project__progress-one-week {
-  width: 20%;
+  width: 21%;
 }
 
 .project__progress-bar_one-week {
@@ -81,7 +82,7 @@
 }
 
 .project__progress-four-week {
-  width: 80%;
+  width: 79%;
 }
 
 .project__progress-bar_four-week {
@@ -96,11 +97,24 @@
 }
 
 @media screen and (max-width: 900px) {
+  .project__header {
+    height: 27px;
+  }
   .project__container {
     padding: 90px 50px;
   }
+  .project__about-container {
+    margin-bottom: 93px;
+  }
   .project__about-item {
     width: 320px;
+    gap: 0;
+  }
+  .project__about-item-subheader {
+    margin-bottom: 22px;
+  }
+  .project__about-item-content {
+    height: 54px;
   }
   .project__about-item-content {
     font-size: 12px;

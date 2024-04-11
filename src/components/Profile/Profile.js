@@ -3,8 +3,8 @@ import "./Profile.css";
 import Header from "../Header/Header";
 
 function Profile() {
-  const [userName, setUserName] = useState("DefaultName");
-  const [userEmail, setUserEmail] = useState("DefaultEmail");
+  const [userName, setUserName] = useState("Виталий");
+  const [userEmail, setUserEmail] = useState("pochta@yandex.ru");
   const [inputStatus, setInputStatus] = useState(false);
 
   function handleEditProfile() {
