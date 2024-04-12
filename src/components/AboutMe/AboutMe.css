@@ -1,0 +1,145 @@
+.aboutme {
+  background-color: var(--dark);
+  padding: 110px 70px 100px;
+}
+
+.aboutme__header {
+  margin: 0;
+  padding-bottom: 23px;
+  border-bottom: 1px solid var(--horizontal-line);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+}
+
+.aboutme__profile {
+  padding-top: 66px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.aboutme__profile-name {
+  margin: 0;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -2px;
+}
+
+.aboutme__profile-subheader {
+  margin: 0;
+  padding: 18px 0 26px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.11;
+}
+
+.aboutme__profile-description {
+  margin: 0;
+  height: 88px;
+  padding-bottom: 99px;
+  max-width: 600px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.57;
+}
+
+.aboutme__profile-github {
+  color: inherit;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.aboutme__profile-github:hover {
+  opacity: 0.7;
+}
+
+.aboutme__profile-photo {
+  width: 270px;
+  height: 327px;
+  flex-shrink: 0;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 900px) {
+  .aboutme {
+    padding: 90px 50px;
+  }
+  .aboutme__profile {
+    gap: 0;
+  }
+  .aboutme__profile-name {
+    font-size: 40px;
+  }
+  .aboutme__profile-subheader {
+    font-size: 12px;
+    padding: 16px 0 20px;
+  }
+  .aboutme__profile-description {
+    font-size: 12px;
+    padding-bottom: 87px;
+    max-width: 364px;
+    max-height: 108px;
+    line-height: 18px;
+  }
+  .aboutme__profile-photo {
+    width: 255px;
+    height: 307px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .aboutme {
+    padding: 70px 14px;
+  }
+  .aboutme__header {
+    height: 22px;
+    padding-bottom: 28px;
+    font-size: 18px;
+  }
+  .aboutme__profile {
+    flex-direction: column-reverse;
+    padding-top: 60px;
+  }
+  .aboutme__profile-photo {
+    width: 100%;
+    height: 352px;
+    padding-bottom: 40px;
+  }
+  .aboutme__profile-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 11px;
+    margin: 0 auto;
+  }
+  .aboutme__profile-name {
+    height: 36px;
+    font-size: 30px;
+    letter-spacing: -.045em;
+  }
+  .aboutme__profile-subheader {
+    height: 16px;
+    line-height: 16px;
+    padding: 0;
+    font-size: 11px;
+    letter-spacing: normal;
+  }
+  .aboutme__profile-description {
+    max-height: 112px;
+    font-size: 11px;
+    line-height: 16px;
+    padding-bottom: 20px;
+    letter-spacing: normal;
+  }
+  .aboutme__profile-github {
+    height: 17px;
+    letter-spacing: normal;
+    font-weight: 400;
+  }
+}
