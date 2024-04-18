@@ -1,5 +1,6 @@
 .movies {
   flex: 1;
+  height: max-content;
 }
 
 .movies__container {

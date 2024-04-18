@@ -1,16 +1,40 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import { AppContext } from "../../contexts/AppContext";
+import filterMovies from "../../utils/filterMovies";
 
-function SavedMovies() {
+function SavedMovies({ movies, ...props }) {
+  const { setMoviesLoading } = useContext(AppContext);
+  const [isChecked, setChecked] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [moviesResult, setMoviesResult] = useState([]);
+
+  useEffect(() => {
+    setMoviesResult(movies);
+  }, []);
+
+  function handleSearchSubmit(e) {
+    e.preventDefault();
+    setMoviesLoading(true);
+    setMoviesResult(filterMovies(moviesResult, searchValue, isChecked));
+    setMoviesLoading(false);
+  }
   return (
     <>
       <Header />
       <main className="content-movies">
-        <SearchForm />
-        <MoviesCardList action="delete" />
+        <SearchForm
+          handleSearchSubmit={handleSearchSubmit}
+          isChecked={isChecked}
+          setChecked={setChecked}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        >
+          <MoviesCardList action="delete" movies={moviesResult} {...props} />
+        </SearchForm>
       </main>
       <Footer />
     </>

@@ -1,18 +1,34 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Profile.css";
 import Header from "../Header/Header";
+import { AppContext } from "../../contexts/AppContext";
+import useFormWithValidation from "../../utils/useFormWithValidation";
 
-function Profile() {
-  const [userName, setUserName] = useState("Виталий");
-  const [userEmail, setUserEmail] = useState("pochta@yandex.ru");
-  const [inputStatus, setInputStatus] = useState(false);
+function Profile({
+  onSignOut,
+  userName,
+  userEmail,
+  setUserName,
+  setUserEmail,
+  onEditSubmit,
+}) {
+  const { errorMessage, setErrorMessage, inputStatus, setInputStatus } =
+    useContext(AppContext);
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
 
-  function handleEditProfile() {
-    if (inputStatus === false) {
-      setInputStatus(true);
-    } else {
-      setInputStatus(false);
-    }
+  function handleInputChange(e) {
+    setErrorMessage("");
+    handleChange(e);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onEditSubmit(values);
+  }
+
+  function handleSignOut(e) {
+    e.preventDefault();
+    onSignOut();
   }
 
   return (
@@ -20,40 +36,51 @@ function Profile() {
       <Header />
       <div className="profile">
         <h2 className="profile__header">Привет, {userName}!</h2>
-        <div className="profile__data-container">
-          <label className="profile__data profile__data-header">Имя</label>
-          <input
-            type="text"
-            className="profile__data profile__data-user"
-            placeholder="Имя"
-            value={userName}
-            disabled={inputStatus === true ? "" : "disabled"}
-            onChange={(e) => setUserName(e.target.value)}
-          />
-        </div>
-        <div className="profile__data-container">
-          <label className="profile__data profile__data-header">E-mail</label>
-          <input
-            type="text"
-            className="profile__data profile__data-user"
-            placeholder="Email"
-            value={userEmail}
-            disabled={inputStatus === true ? "" : "disabled"}
-            onChange={(e) => setUserEmail(e.target.value)}
-          />
-        </div>
+        <form id="profileForm" className="profile__form">
+          <div className="profile__data-container">
+            <label className="profile__data profile__data-header">Имя</label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              className="profile__data profile__data-user"
+              placeholder="Имя"
+              form="profileForm"
+              value={values.name || ""}
+              disabled={inputStatus === true ? "" : "disabled"}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="profile__data-container">
+            <label className="profile__data profile__data-header">E-mail</label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              className="profile__data profile__data-user"
+              form="profileForm"
+              placeholder="Email"
+              value={values.email || ""}
+              disabled={inputStatus === true ? "" : "disabled"}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+        </form>
         <div className="profile__btn-container">
           {inputStatus === true ? (
-            <button
-              className="profile__save-btn profile__btn"
-              type="submit"
-              onClick={(e) => {
-                e.preventDefault();
-                handleEditProfile();
-              }}
-            >
-              Сохранить
-            </button>
+            <>
+              <div className="profile__error">{errorMessage}</div>
+              <button
+                className="profile__save-btn profile__btn"
+                type="submit"
+                onClick={handleSubmit}
+                form="editProfile"
+              >
+                Сохранить
+              </button>
+            </>
           ) : (
             <>
               <button
@@ -61,7 +88,7 @@ function Profile() {
                 className="profile__edit-btn profile__btn"
                 onClick={(e) => {
                   e.preventDefault();
-                  handleEditProfile();
+                  setInputStatus(true);
                 }}
               >
                 Редактировать
@@ -69,6 +96,8 @@ function Profile() {
               <button
                 type="button"
                 className="profile__logout-btn profile__btn"
+                onClick={handleSignOut}
+                disabled={!isValid}
               >
                 Выйти из аккаунта
               </button>

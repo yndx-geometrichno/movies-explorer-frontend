@@ -1,31 +1,49 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./MoviesCard.css";
+import { normalizeDuration } from "../../utils/normalizeDuration";
+import { Link } from "react-router-dom";
 
-function MoviesCard({ movie, name, link, length, onMovieLike, onMovieDelete, action }) {
-  // const currentUser = useContext(CurrentUserContext);
-  const currentUser = {
-    id: "owner",
-  };
-  const isOwn = movie.owner === currentUser._id;
-  // const isLiked = movie.likes && movie.likes.some((i) => i === currentUser._id);
-  const isLiked = true;
+function MoviesCard({
+  movie,
+  name,
+  link,
+  duration,
+  movieId,
+  trailerLink,
+  onMovieLike,
+  onMovieDelete,
+  action,
+  isMovieLiked
+}) {
+  const stringDuration = normalizeDuration(duration);
+
+  const currentUser = useContext(CurrentUserContext);
+  // const isOwn = movie.owner === currentUser._id;
+  const [ isLiked, setIsLiked ] = useState(isMovieLiked);
+  if (movie.owner && movie.owner.includes(currentUser._id)) {
+    setIsLiked(true);
+  }
 
   const movieLikeButtonClassName = `movie__btn movie__btn-like ${
     isLiked && "movie__btn movie__btn-like_active"
   }`;
 
   function handleLikeClick() {
-    onMovieLike(movie, isLiked);
+    onMovieLike(movie);
+    setIsLiked(true)
   }
 
   function handleDeleteClick() {
     onMovieDelete(movie);
+    setIsLiked(false);
   }
 
   return (
     <article className="movie">
-      <img className="movie__img" src={link} alt={name} />
+      <Link to={trailerLink} target="_blank" >
+        <img className="movie__img" src={link} alt={name} />
+      </Link>
       <div className="movie__info">
         <h2 className="movie__name">{name}</h2>
         {action === "save" ? (
@@ -33,7 +51,7 @@ function MoviesCard({ movie, name, link, length, onMovieLike, onMovieDelete, act
             type="button"
             className={`${movieLikeButtonClassName} button`}
             aria-label="Нравится"
-            onClick={handleLikeClick}
+            onClick={isLiked ? handleDeleteClick : handleLikeClick}
           />
         ) : (
           <button
@@ -44,7 +62,7 @@ function MoviesCard({ movie, name, link, length, onMovieLike, onMovieDelete, act
           />
         )}
       </div>
-      <p className="movie__length">{length}</p>
+      <p className="movie__length">{stringDuration}</p>
     </article>
   );
 }
