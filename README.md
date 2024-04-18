@@ -9,3 +9,4 @@ https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/%D0%94%D0%B8%D0%BF%D0%BB%D0%BE
 https://github.com/yndx-geometrichno/movies-explorer-frontend/pull/4
 
 ## Ссылка на деплой проекта
+https://movies.project.nomoredomainsmonster.ru/
