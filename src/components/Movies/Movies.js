@@ -28,35 +28,36 @@ function Movies({ movies, onMovieLike, onMovieDelete, ...props }) {
   }, []);
 
   useEffect(() => {
-    if (moviesResult.length > 0 && !isChecked) {
+    if (beatFilms.length > 0) {
       setMoviesResult(filterMovies(moviesResult, searchValue, isChecked));
-    } else if (moviesResult.length > 0) {
-      setMoviesLoading(true);
-      setMoviesResult(filterMovies(beatFilms, searchValue, isChecked));
-      localStorage.setItem("shortFilms", JSON.stringify(isChecked));
-      localStorage.setItem("searchValue", searchValue);
-      localStorage.setItem("moviesResult", JSON.stringify(moviesResult));
-      setMoviesLoading(false);
     }
   }, [isChecked]);
 
   function handleSearchSubmit(e) {
     e.preventDefault();
     setMoviesLoading(true);
-    mainApi
-      .getBeatMovies()
-      .then((res) => {
-        setBeatFilms(res);
-        setMoviesResult(filterMovies(beatFilms, searchValue, isChecked));
-        localStorage.setItem("shortFilms", JSON.stringify(isChecked));
-        localStorage.setItem("searchValue", searchValue);
-        localStorage.setItem("moviesResult", JSON.stringify(moviesResult));
-        setMoviesLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setMoviesLoading(false);
-      });
+    if (beatFilms.length > 0) {
+      setMoviesResult(filterMovies(beatFilms, searchValue, isChecked));
+      localStorage.setItem("shortFilms", JSON.stringify(isChecked));
+      localStorage.setItem("searchValue", searchValue);
+      localStorage.setItem("moviesResult", JSON.stringify(moviesResult));
+      setMoviesLoading(false);
+    } else {
+      mainApi
+        .getBeatMovies()
+        .then((res) => {
+          setBeatFilms(res);
+          setMoviesResult(filterMovies(beatFilms, searchValue, isChecked));
+          localStorage.setItem("shortFilms", JSON.stringify(isChecked));
+          localStorage.setItem("searchValue", searchValue);
+          localStorage.setItem("moviesResult", JSON.stringify(moviesResult));
+          setMoviesLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setMoviesLoading(false);
+        });
+    }
   }
 
   return (

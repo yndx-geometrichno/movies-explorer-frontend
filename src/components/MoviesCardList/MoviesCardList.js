@@ -27,7 +27,7 @@ function MoviesCardList(props) {
   useEffect(() => {
     setMovies(props.movies || []);
     setVisibleMovies(props.movies.slice(0, getAmountOfCards()));
-  }, [props.movies]);
+  }, [props]);
 
   const handleResize = () => {
     clearTimeout(resizeTimer);

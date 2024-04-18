@@ -17,7 +17,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { errorMessages } from "../../constants/errorMessages";
 
 function App() {
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem("isLoggedIn")));
   const [currentUser, setCurrentUser] = useState({});
   const [allMovies, setAllMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
@@ -75,6 +75,7 @@ function App() {
         console.log(res);
         if (res._id) {
           navigate("/movies", { replace: true });
+          localStorage.setItem("isLoggedIn", JSON.stringify(true))
           setUserEmail(email);
           setUserName(res.name);
           setLoggedIn(true);
@@ -133,7 +134,11 @@ function App() {
   function onSignOut() {
     logout()
       .then(() => {
-        localStorage.clear();
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("searchValue");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("shortFilms");
+        localStorage.removeItem("moviesResult");
         setLoggedIn(false);
         setUserEmail("");
         setUserName("");
