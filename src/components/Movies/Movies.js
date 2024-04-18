@@ -13,6 +13,7 @@ function Movies({ movies, onMovieLike, onMovieDelete, ...props }) {
   const [isChecked, setChecked] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [moviesResult, setMoviesResult] = useState([]);
+  const [beatFilms, setBeatFilms] = useState([]);
 
   useEffect(() => {
     setChecked(false);
@@ -28,23 +29,16 @@ function Movies({ movies, onMovieLike, onMovieDelete, ...props }) {
 
   useEffect(() => {
     if (moviesResult.length > 0 && !isChecked) {
-      setMoviesResult(filterMovies(moviesResult, searchValue, isChecked))
-    } else if (moviesResult.length > 0) {setMoviesLoading(true);
-      mainApi
-        .getBeatMovies()
-        .then((res) => {
-          setMoviesResult(filterMovies(res, searchValue, isChecked));
-          localStorage.setItem("shortFilms", JSON.stringify(isChecked));
-          localStorage.setItem("searchValue", searchValue);
-          localStorage.setItem("moviesResult", JSON.stringify(moviesResult));
-          setMoviesLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-          setMoviesLoading(false);
-        });
+      setMoviesResult(filterMovies(moviesResult, searchValue, isChecked));
+    } else if (moviesResult.length > 0) {
+      setMoviesLoading(true);
+      setMoviesResult(filterMovies(beatFilms, searchValue, isChecked));
+      localStorage.setItem("shortFilms", JSON.stringify(isChecked));
+      localStorage.setItem("searchValue", searchValue);
+      localStorage.setItem("moviesResult", JSON.stringify(moviesResult));
+      setMoviesLoading(false);
     }
-  }, [isChecked])
+  }, [isChecked]);
 
   function handleSearchSubmit(e) {
     e.preventDefault();
@@ -52,7 +46,8 @@ function Movies({ movies, onMovieLike, onMovieDelete, ...props }) {
     mainApi
       .getBeatMovies()
       .then((res) => {
-        setMoviesResult(filterMovies(res, searchValue, isChecked));
+        setBeatFilms(res);
+        setMoviesResult(filterMovies(beatFilms, searchValue, isChecked));
         localStorage.setItem("shortFilms", JSON.stringify(isChecked));
         localStorage.setItem("searchValue", searchValue);
         localStorage.setItem("moviesResult", JSON.stringify(moviesResult));

@@ -8,8 +8,6 @@ function Profile({
   onSignOut,
   userName,
   userEmail,
-  setUserName,
-  setUserEmail,
   onEditSubmit,
 }) {
   const { errorMessage, setErrorMessage, inputStatus, setInputStatus } =
@@ -46,7 +44,7 @@ function Profile({
               className="profile__data profile__data-user"
               placeholder="Имя"
               form="profileForm"
-              value={values.name || ""}
+              value={values.name || userName}
               disabled={inputStatus === true ? "" : "disabled"}
               onChange={handleInputChange}
               required
@@ -61,7 +59,7 @@ function Profile({
               className="profile__data profile__data-user"
               form="profileForm"
               placeholder="Email"
-              value={values.email || ""}
+              value={values.email || userEmail}
               disabled={inputStatus === true ? "" : "disabled"}
               onChange={handleInputChange}
               required
