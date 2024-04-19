@@ -101,6 +101,18 @@
   transition-duration: 300ms;
 }
 
+.search__error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #ee3465;
+  border-radius: 15px;
+  box-shadow: 0 0 3px #ee3465;
+}
+
 .search__checkbox:checked + .search__checkbox-label::before {
   right: 139px;
   background-color: #fff;
