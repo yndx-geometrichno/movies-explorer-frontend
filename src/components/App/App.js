@@ -89,7 +89,7 @@ function App() {
         if (!res.newUser) {
           throw new Error("");
         }
-        navigate("/signin", { replace: true });
+        handleLogin({ email, password })
       })
       .catch((err) => {
         if (err.status === 409) {
