@@ -4,17 +4,25 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import { AppContext } from "../../contexts/AppContext";
 import Preloader from "../Preloader/Preloader";
 import getAmountOfCards from "../../utils/getAmountOfCards";
-import {errorMessages} from "../../constants/errorMessages"
+import { errorMessages } from "../../constants/errorMessages";
+import { moviesListValues } from "../../constants/moviesListValues";
 
 function MoviesCardList(props) {
+  const {
+    defaultMoviesPerPage,
+    resizeTimeout,
+    amountOfMoviesToLoadDesktop,
+    amountOfMoviesToLoadMobile,
+    mainApiUrl,
+  } = moviesListValues;
+
   const [movies, setMovies] = useState([]);
   const [isButtonVisible, setButtonVisible] = useState(true);
-  const [cardsPerPage, setCardsPerPage] = useState(12);
+  const [cardsPerPage, setCardsPerPage] = useState(defaultMoviesPerPage);
   const [visibleMovies, setVisibleMovies] = useState([]);
   const [visibleCardsCount, setVisibleCardsCount] = useState(
     getAmountOfCards()
   );
-  const mainApiUrl = "https://api.nomoreparties.co/";
 
   const { isMoviesLoading, savedMoviesId } = useContext(AppContext);
 
@@ -31,7 +39,7 @@ function MoviesCardList(props) {
 
   const handleResize = () => {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(updateCardsPerPage, 300);
+    resizeTimer = setTimeout(updateCardsPerPage, resizeTimeout);
   };
 
   let resizeTimer;
@@ -42,12 +50,12 @@ function MoviesCardList(props) {
 
   const handleLoadMoreClick = () => {
     let newVisibleCount;
-    if (cardsPerPage === 12) {
-      newVisibleCount = visibleCardsCount + 3;
+    if (cardsPerPage === defaultMoviesPerPage) {
+      newVisibleCount = visibleCardsCount + amountOfMoviesToLoadDesktop;
       setVisibleMovies(movies.slice(0, newVisibleCount));
       setVisibleCardsCount(newVisibleCount);
     } else {
-      newVisibleCount = visibleCardsCount + 2;
+      newVisibleCount = visibleCardsCount + amountOfMoviesToLoadMobile;
       setVisibleMovies(movies.slice(0, newVisibleCount));
       setVisibleCardsCount(newVisibleCount);
     }

@@ -9,7 +9,6 @@ function MoviesCard({
   name,
   link,
   duration,
-  movieId,
   trailerLink,
   onMovieLike,
   onMovieDelete,
