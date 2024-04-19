@@ -3,15 +3,15 @@ import "./Profile.css";
 import Header from "../Header/Header";
 import { AppContext } from "../../contexts/AppContext";
 import useFormWithValidation from "../../utils/useFormWithValidation";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function Profile({
   onSignOut,
-  userName,
-  userEmail,
   onEditSubmit,
 }) {
   const { errorMessage, setErrorMessage, inputStatus, setInputStatus } =
     useContext(AppContext);
+  const { currentUser } = useContext(CurrentUserContext)
   const { values, handleChange, isValid } = useFormWithValidation();
 
   function handleInputChange(e) {
@@ -33,7 +33,7 @@ function Profile({
     <>
       <Header />
       <div className="profile">
-        <h2 className="profile__header">Привет, {userName}!</h2>
+        <h2 className="profile__header">Привет, {currentUser.name}!</h2>
         <form id="profileForm" className="profile__form">
           <div className="profile__data-container">
             <label className="profile__data profile__data-header">Имя</label>
@@ -44,7 +44,7 @@ function Profile({
               className="profile__data profile__data-user"
               placeholder="Имя"
               form="profileForm"
-              value={values.name || userName}
+              value={values.name || currentUser.name}
               disabled={inputStatus === true ? "" : "disabled"}
               onChange={handleInputChange}
               required
@@ -59,7 +59,7 @@ function Profile({
               className="profile__data profile__data-user"
               form="profileForm"
               placeholder="Email"
-              value={values.email || userEmail}
+              value={values.email || currentUser.email}
               disabled={inputStatus === true ? "" : "disabled"}
               onChange={handleInputChange}
               required

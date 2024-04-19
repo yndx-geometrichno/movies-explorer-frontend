@@ -17,7 +17,9 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { errorMessages } from "../../constants/errorMessages";
 
 function App() {
-  const [isLoggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem("isLoggedIn")));
+  const [isLoggedIn, setLoggedIn] = useState(
+    JSON.parse(localStorage.getItem("isLoggedIn"))
+  );
   const [currentUser, setCurrentUser] = useState({});
   const [allMovies, setAllMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
@@ -46,18 +48,10 @@ function App() {
         console.log(err);
       });
     if (JSON.parse(localStorage.getItem("isLoggedIn"))) {
-      let userId = localStorage.getItem("userId");
-      checkToken(userId)
-        .then((res) => {
-          setLoggedIn(true);
-          setUserEmail(res.email);
-          setUserName(res.name);
-          navigate("/", { replace: true });
-        })
-        .catch((err) => {
-          localStorage.removeItem("userId");
-          console.log(err);
-        });
+      moviesApi.getUserInfo().then((res) => {
+        setCurrentUser(res);
+        setLoggedIn(true);
+      });
     }
   }, []);
 
@@ -69,15 +63,14 @@ function App() {
     );
   }, [savedMovies]);
 
-  function handleLogin({email, password}) {
+  function handleLogin({ email, password }) {
     authorize(email, password)
       .then((res) => {
         console.log(res);
         if (res._id) {
           navigate("/movies", { replace: true });
-          localStorage.setItem("isLoggedIn", JSON.stringify(true))
-          setUserEmail(email);
-          setUserName(res.name);
+          localStorage.setItem("isLoggedIn", JSON.stringify(true));
+          setCurrentUser(res);
           setLoggedIn(true);
         }
       })
@@ -113,8 +106,7 @@ function App() {
     moviesApi
       .updateUserInfo(userEmail, userName)
       .then((res) => {
-        setUserEmail(res.email);
-        setUserName(res.name);
+        setCurrentUser(res);
         setErrorMessage("");
         setInputStatus(false);
       })
@@ -140,8 +132,7 @@ function App() {
         localStorage.removeItem("shortFilms");
         localStorage.removeItem("moviesResult");
         setLoggedIn(false);
-        setUserEmail("");
-        setUserName("");
+        setCurrentUser({});
       })
       .catch((err) => {
         console.log(err);
@@ -223,8 +214,6 @@ function App() {
                     onSignOut={onSignOut}
                     userName={userName}
                     userEmail={userEmail}
-                    setUserName={setUserName}
-                    setUserEmail={setUserEmail}
                     onEditSubmit={handleProfileSubmit}
                   />
                 }

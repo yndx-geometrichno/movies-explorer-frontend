@@ -1,5 +1,5 @@
 const contentType = {
-  "Accept": 'application/json',
+  Accept: "application/json",
   "Content-type": "application/json",
 };
 
@@ -22,7 +22,7 @@ export const register = (name, email, password) => {
     headers: contentType,
     body: JSON.stringify({ name, email, password }),
   }).then((res) => {
-    console.log(res)
+    console.log(res);
     return res;
   });
 };
@@ -34,7 +34,7 @@ export const authorize = (email, password) => {
     credentials: "include",
     body: JSON.stringify({ email, password }),
   }).then((data) => {
-    console.log(data)
+    console.log(data);
     if (data.user._id) {
       localStorage.setItem("userId", data.user._id);
       return data.user;
@@ -47,12 +47,5 @@ export const logout = () => {
     method: "POST",
     headers: contentType,
     credentials: "include",
-  })
-}
-
-export const checkToken = (token) => {
-  return request("/users/me", {
-    headers: {contentType},
-    credentials: "include",
-  }).then((data) => data);
+  });
 };
