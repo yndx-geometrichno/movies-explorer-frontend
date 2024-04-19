@@ -22,7 +22,6 @@ export const register = (name, email, password) => {
     headers: contentType,
     body: JSON.stringify({ name, email, password }),
   }).then((res) => {
-    console.log(res);
     return res;
   });
 };
@@ -34,7 +33,6 @@ export const authorize = (email, password) => {
     credentials: "include",
     body: JSON.stringify({ email, password }),
   }).then((data) => {
-    console.log(data);
     if (data.user._id) {
       localStorage.setItem("userId", data.user._id);
       return data.user;

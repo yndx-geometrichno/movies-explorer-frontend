@@ -28,7 +28,6 @@ function Profile({ onSignOut, onEditSubmit, successMessage }) {
     if (!values.name) {
       values.name = currentUser.name;
     }
-    console.log(values);
     onEditSubmit(values);
   }
 
