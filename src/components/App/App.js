@@ -66,7 +66,6 @@ function App() {
   function handleLogin({ email, password }) {
     authorize(email, password)
       .then((res) => {
-        console.log(res);
         if (res._id) {
           navigate("/movies", { replace: true });
           localStorage.setItem("isLoggedIn", JSON.stringify(true));
@@ -103,7 +102,6 @@ function App() {
   }
 
   function handleProfileSubmit({ email, name }) {
-    console.log(email, name)
     moviesApi
       .updateUserInfo(email, name)
       .then((res) => {
