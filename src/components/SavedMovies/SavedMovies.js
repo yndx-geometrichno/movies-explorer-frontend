@@ -28,6 +28,9 @@ function SavedMovies({ movies, ...props }) {
     setMoviesLoading(true);
     setMoviesResult(filterMovies(moviesResult, searchValue, isChecked));
     setMoviesLoading(false);
+    if (moviesResult.length < 1) {
+      setSearchError(errorMessages.nothingIsFound);
+    }
   }
   return (
     <>

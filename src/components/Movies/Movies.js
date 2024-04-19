@@ -59,6 +59,9 @@ function Movies({ movies, onMovieLike, onMovieDelete, ...props }) {
           localStorage.setItem("searchValue", searchValue);
           localStorage.setItem("moviesResult", JSON.stringify(moviesResult));
           setMoviesLoading(false);
+          if (moviesResult.length < 1) {
+            setSearchError(errorMessages.nothingIsFound);
+          }
         })
         .catch((err) => {
           console.log(err);
