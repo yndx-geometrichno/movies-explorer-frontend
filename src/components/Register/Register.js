@@ -1,3 +1,4 @@
+import { btnNames } from "../../constants/btnNames";
 import SignForm from "../SignForm/SignForm";
 import { Link } from "react-router-dom";
 
@@ -11,13 +12,13 @@ function Register({ onRegister }) {
       <SignForm
         header="Добро пожаловать!"
         onSubmit={handleSubmit}
-        buttonText="Зарегистрироваться"
+        buttonText={btnNames.registration}
         formType="form__register"
       >
         <p className="sign__link-container">
-          Уже зарегистрированы?
+          {btnNames.alreadyRegistered}
           <Link to="/signin" className="sign__link">
-            Войти
+            {btnNames.login}
           </Link>
         </p>
       </SignForm>

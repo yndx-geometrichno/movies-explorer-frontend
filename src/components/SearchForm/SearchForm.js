@@ -1,5 +1,7 @@
 import React from "react";
 import "./SearchForm.css";
+import { btnNames } from "../../constants/btnNames";
+import { placeholders } from "../../constants/placeholders";
 
 function SearchForm({
   isChecked,
@@ -19,7 +21,7 @@ function SearchForm({
             id="movie"
             type="text"
             className="search__input"
-            placeholder="Фильм"
+            placeholder={placeholders.movie}
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
             required
@@ -41,7 +43,7 @@ function SearchForm({
             onClick={() => setChecked((state) => !state)}
           />
           <label htmlFor="shortfilms" className="search__checkbox-label">
-            Короткометражки
+            {btnNames.shortMovies}
           </label>
         </div>
       </form>

@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import "./Navigation.css";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../contexts/AppContext";
+import { btnNames } from "../../constants/btnNames";
 
 function Navigation() {
   const appContext = useContext(AppContext);
@@ -52,7 +53,7 @@ function Navigation() {
                 currentPath === "/movies" && "navigation__movie-button_active"
               }`}
             >
-              Фильмы
+              {btnNames.movies}
             </Link>
             <Link
               to={"/saved-movies"}
@@ -61,7 +62,7 @@ function Navigation() {
                 "navigation__movie-button_active"
               }`}
             >
-              Сохраненные фильмы
+              {btnNames.savedMovies}
             </Link>
           </div>
         ))}
@@ -69,17 +70,17 @@ function Navigation() {
         {isLoggedIn ? (
           isMobileWidth ? null : (
             <Link to={"/profile"} className="navigation__profile-button">
-              Аккаунт
+              {btnNames.account}
               <div className="navigation__profile-picture"></div>
             </Link>
           )
         ) : (
           <div className="navigation__profile-auth">
             <Link to={"/signup"} className="navigation__profile-btn-signup">
-              Регистрация
+              {btnNames.registration}
             </Link>
             <Link to={"/signin"} className="navigation__profile-btn-signin">
-              Войти
+              {btnNames.login}
             </Link>
           </div>
         )}
@@ -99,7 +100,7 @@ function Navigation() {
               }`}
               to={"/"}
             >
-              Главная
+              {btnNames.mainPage}
             </Link>
             <Link
               to={"/movies"}
@@ -107,7 +108,7 @@ function Navigation() {
                 currentPath === "/movies" && "navigation__movie-button_active"
               }`}
             >
-              Фильмы
+              {btnNames.movies}
             </Link>
             <Link
               to={"/saved-movies"}
@@ -116,11 +117,11 @@ function Navigation() {
                 "navigation__movie-button_active"
               }`}
             >
-              Сохраненные фильмы
+              {btnNames.savedMovies}
             </Link>
           </div>
           <Link to={"/profile"} className="navigation__profile-button">
-            Аккаунт
+            {btnNames.account}
             <div className="navigation__profile-picture"></div>
           </Link>
           <button

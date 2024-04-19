@@ -3,6 +3,7 @@ import "./SignForm.css";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../contexts/AppContext";
 import useFormWithValidation from "../../utils/useFormWithValidation";
+import { placeholders } from "../../constants/placeholders";
 
 function SignForm({ header, buttonText, formType, children, onSubmit }) {
   const { errorMessage, setErrorMessage } = useContext(AppContext);
@@ -31,7 +32,7 @@ function SignForm({ header, buttonText, formType, children, onSubmit }) {
           {formType === "form__register" && (
             <>
               <label className="sign__form-label" htmlFor="name">
-                Имя
+                {placeholders.name}
               </label>
               <input
                 id="name"
@@ -42,7 +43,7 @@ function SignForm({ header, buttonText, formType, children, onSubmit }) {
                 }`}
                 minLength={2}
                 maxLength={30}
-                placeholder="Имя"
+                placeholder={placeholders.name}
                 value={values.name || ""}
                 onChange={handleInputChange}
                 required
@@ -55,13 +56,13 @@ function SignForm({ header, buttonText, formType, children, onSubmit }) {
             </>
           )}
           <label className="sign__form-label" htmlFor="email">
-            E-mail
+          {placeholders.email}
           </label>
           <input
             id="email"
             type="email"
             name="email"
-            placeholder="Email"
+            placeholder={placeholders.email}
             className={`sign__form-input ${
               errors.email && "sign__form-input_error"
             }`}
@@ -75,13 +76,13 @@ function SignForm({ header, buttonText, formType, children, onSubmit }) {
             </span>
           ) : null}
           <label className="sign__form-label" htmlFor="password">
-            Пароль
+          {placeholders.password}
           </label>
           <input
             id="password"
             type="password"
             name="password"
-            placeholder="Пароль"
+            placeholder={placeholders.password}
             className={`sign__form-input ${
               errors.password && "sign__form-input_error"
             }`}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SignForm from "../SignForm/SignForm";
 import { Link } from "react-router-dom";
+import { btnNames } from "../../constants/btnNames";
 
 function Login({ onLogin }) {
   const [email, setEmail] = useState("");
@@ -19,13 +20,13 @@ function Login({ onLogin }) {
         onSubmit={handleSubmit}
         setEmail={setEmail}
         setPassword={setPassword}
-        buttonText="Войти"
+        buttonText={btnNames.login}
         formType="form__login"
       >
         <p className="sign__link-container">
-          Еще не зарегистрированы?
+          {btnNames.alreadyRegistered}
           <Link to="/signup" className="sign__link">
-            Регистрация
+            {btnNames.registration}
           </Link>
         </p>
       </SignForm>
