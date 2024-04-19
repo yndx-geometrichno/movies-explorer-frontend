@@ -24,6 +24,9 @@ function Movies({ movies, onMovieLike, onMovieDelete, ...props }) {
   useEffect(() => {
     if (beatFilms.length > 0) {
       setMoviesResult(filterMovies(moviesResult, searchValue, isChecked));
+      if (moviesResult.length < 1) {
+        setSearchError(errorMessages.nothingIsFound);
+      }
     }
   }, [isChecked]);
 

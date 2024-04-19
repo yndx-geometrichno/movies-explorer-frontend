@@ -112,7 +112,6 @@ function App() {
         setErrorMessage("");
       })
       .catch((err) => {
-        console.log(err);
         if (err.status === 409) {
           setErrorMessage(errorMessages.emailAlreadyExistsError);
         } else if (err.status === 500) {
