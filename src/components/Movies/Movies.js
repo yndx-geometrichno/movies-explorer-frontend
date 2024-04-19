@@ -11,23 +11,15 @@ import { errorMessages } from "../../constants/errorMessages";
 
 function Movies({ movies, onMovieLike, onMovieDelete, ...props }) {
   const { setMoviesLoading } = useContext(AppContext);
-  const [isChecked, setChecked] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
-  const [moviesResult, setMoviesResult] = useState([]);
+  const [isChecked, setChecked] = useState(
+    JSON.parse(localStorage.getItem("shortFilms")) || false
+  );
+  const [searchValue, setSearchValue] = useState(
+    localStorage.getItem("searchValue") || ""
+  );
+  const [moviesResult, setMoviesResult] = useState(JSON.parse(localStorage.getItem("moviesResult")) || []);
   const [beatFilms, setBeatFilms] = useState([]);
   const [searchError, setSearchError] = useState("");
-
-  useEffect(() => {
-    setChecked(false);
-    const value = localStorage.getItem("searchValue");
-    const checkbox = JSON.parse(localStorage.getItem("shortFilms"));
-    const movies = JSON.parse(localStorage.getItem("moviesResult"));
-    if (value) {
-      setSearchValue(value);
-      setChecked(checkbox);
-      setMoviesResult(movies);
-    }
-  }, []);
 
   useEffect(() => {
     if (beatFilms.length > 0) {
