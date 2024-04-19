@@ -12,9 +12,10 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 import { mainApi } from "../../utils/MainApi";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { moviesApi } from "../../utils/MoviesApi";
-import { register, authorize, logout, checkToken } from "../../utils/AuthApi";
+import { register, authorize, logout } from "../../utils/AuthApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { errorMessages } from "../../constants/errorMessages";
+import { successMessages } from "../../constants/successMessages";
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(
@@ -23,12 +24,11 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [allMovies, setAllMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [userEmail, setUserEmail] = useState("");
-  const [userName, setUserName] = useState("");
   const [isMoviesLoading, setMoviesLoading] = useState(false);
   const [inputStatus, setInputStatus] = useState(false);
   const [savedMoviesId, setSavedMoviesId] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("")
 
   const navigate = useNavigate();
 
@@ -89,7 +89,7 @@ function App() {
         if (!res.newUser) {
           throw new Error("");
         }
-        handleLogin({ email, password })
+        handleLogin({ email, password });
       })
       .catch((err) => {
         if (err.status === 409) {
@@ -102,13 +102,14 @@ function App() {
       });
   }
 
-  function handleProfileSubmit() {
+  function handleProfileSubmit({ email, name }) {
+    console.log(email, name)
     moviesApi
-      .updateUserInfo(userEmail, userName)
+      .updateUserInfo(email, name)
       .then((res) => {
         setCurrentUser(res);
+        setSuccessMessage(successMessages.updateProfileSuccess);
         setErrorMessage("");
-        setInputStatus(false);
       })
       .catch((err) => {
         console.log(err);
@@ -120,7 +121,12 @@ function App() {
           setErrorMessage(errorMessages.profileUpdateError);
         }
         setInputStatus(true);
-      });
+      }).finally(() => {
+        setTimeout(() => {
+          setSuccessMessage("");
+          setInputStatus(false);
+        }, 3000);
+      })
   }
 
   function onSignOut() {
@@ -212,9 +218,8 @@ function App() {
                   <ProtectedRoute
                     element={Profile}
                     onSignOut={onSignOut}
-                    userName={userName}
-                    userEmail={userEmail}
                     onEditSubmit={handleProfileSubmit}
+                    successMessage={successMessage}
                   />
                 }
               />

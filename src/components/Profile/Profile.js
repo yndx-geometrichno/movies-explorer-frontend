@@ -4,14 +4,12 @@ import Header from "../Header/Header";
 import { AppContext } from "../../contexts/AppContext";
 import useFormWithValidation from "../../utils/useFormWithValidation";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { btnNames } from "../../constants/btnNames";
 
-function Profile({
-  onSignOut,
-  onEditSubmit,
-}) {
+function Profile({ onSignOut, onEditSubmit, successMessage }) {
   const { errorMessage, setErrorMessage, inputStatus, setInputStatus } =
     useContext(AppContext);
-  const { currentUser } = useContext(CurrentUserContext)
+  const { currentUser } = useContext(CurrentUserContext);
   const { values, handleChange, isValid } = useFormWithValidation();
 
   function handleInputChange(e) {
@@ -21,6 +19,16 @@ function Profile({
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (Object.keys(values).length === 0) {
+      setErrorMessage("")
+    }
+    if (!values.email) {
+      values.email = currentUser.email;
+    }
+    if (!values.name) {
+      values.name = currentUser.name;
+    }
+    console.log(values);
     onEditSubmit(values);
   }
 
@@ -69,16 +77,22 @@ function Profile({
         <div className="profile__btn-container">
           {inputStatus === true ? (
             <>
-              <div className="profile__error">{errorMessage}</div>
-              <button
-                className="profile__save-btn profile__btn"
-                type="submit"
-                onClick={handleSubmit}
-                form="editProfile"
-                disabled={!isValid}
-              >
-                Сохранить
-              </button>
+              {errorMessage ? (
+                <div className="profile__error">{errorMessage}</div>
+              ) : null}
+              {successMessage ? (
+                <div className="profile__success">{successMessage}</div>
+              ) : (
+                <button
+                  className="profile__save-btn profile__btn"
+                  type="submit"
+                  onClick={handleSubmit}
+                  form="editProfile"
+                  disabled={!isValid}
+                >
+                  {btnNames.save}
+                </button>
+              )}
             </>
           ) : (
             <>
@@ -90,14 +104,14 @@ function Profile({
                   setInputStatus(true);
                 }}
               >
-                Редактировать
+                {btnNames.editProfile}
               </button>
               <button
                 type="button"
                 className="profile__logout-btn profile__btn"
                 onClick={handleSignOut}
               >
-                Выйти из аккаунта
+                {btnNames.exitProfile}
               </button>
             </>
           )}
