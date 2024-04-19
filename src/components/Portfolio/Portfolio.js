@@ -22,7 +22,7 @@ function Portfolio() {
       <ul className="portfolio__projects-list">
         <li className="portfolio__project-item">
           <Link
-            to={staticWebsiteLink}
+            to={{staticWebsiteLink}}
             target="_blank"
             className="portfolio__project-link"
           >
@@ -32,7 +32,7 @@ function Portfolio() {
         </li>
         <li className="portfolio__project-item">
           <Link
-            to={adaptiveWebsiteLink}
+            to={{adaptiveWebsiteLink}}
             target="_blank"
             className="portfolio__project-link"
           >
@@ -42,7 +42,7 @@ function Portfolio() {
         </li>
         <li className="portfolio__project-item">
           <Link
-            to={spaWebsiteLink}
+            to={{spaWebsiteLink}}
             target="_blank"
             className="portfolio__project-link"
           >
