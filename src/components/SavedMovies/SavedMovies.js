@@ -16,7 +16,7 @@ function SavedMovies({ movies, ...props }) {
 
   useEffect(() => {
     setMoviesResult(movies);
-  }, []);
+  }, [movies]);
 
   function handleSearchSubmit(e) {
     e.preventDefault();
