@@ -7,6 +7,7 @@ function SearchForm({
   searchValue,
   setSearchValue,
   handleSearchSubmit,
+  searchError,
   ...props
 }) {
   return (
@@ -44,6 +45,7 @@ function SearchForm({
           </label>
         </div>
       </form>
+      {searchError ? <p className="search__error">{searchError}</p> : null}
       {props.children}
     </>
   );

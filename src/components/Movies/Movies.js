@@ -7,6 +7,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import { AppContext } from "../../contexts/AppContext";
 import filterMovies from "../../utils/filterMovies";
 import { mainApi } from "../../utils/MainApi";
+import { errorMessages } from "../../constants/errorMessages";
 
 function Movies({ movies, onMovieLike, onMovieDelete, ...props }) {
   const { setMoviesLoading } = useContext(AppContext);
@@ -14,6 +15,7 @@ function Movies({ movies, onMovieLike, onMovieDelete, ...props }) {
   const [searchValue, setSearchValue] = useState("");
   const [moviesResult, setMoviesResult] = useState([]);
   const [beatFilms, setBeatFilms] = useState([]);
+  const [searchError, setSearchError] = useState("");
 
   useEffect(() => {
     setChecked(false);
@@ -35,6 +37,11 @@ function Movies({ movies, onMovieLike, onMovieDelete, ...props }) {
 
   function handleSearchSubmit(e) {
     e.preventDefault();
+    if (!searchValue) {
+      setSearchError(errorMessages.searchFieldIsEmpty);
+      return;
+    }
+    setSearchError("");
     setMoviesLoading(true);
     if (beatFilms.length > 0) {
       setMoviesResult(filterMovies(beatFilms, searchValue, isChecked));
@@ -55,6 +62,7 @@ function Movies({ movies, onMovieLike, onMovieDelete, ...props }) {
         })
         .catch((err) => {
           console.log(err);
+          setSearchError(err);
           setMoviesLoading(false);
         });
     }
@@ -70,6 +78,7 @@ function Movies({ movies, onMovieLike, onMovieDelete, ...props }) {
           setChecked={setChecked}
           searchValue={searchValue}
           setSearchValue={setSearchValue}
+          searchError={searchError}
         >
           <MoviesCardList
             action="save"
