@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./Profile.css";
 import Header from "../Header/Header";
 import { AppContext } from "../../contexts/AppContext";
@@ -12,7 +12,7 @@ function Profile({
 }) {
   const { errorMessage, setErrorMessage, inputStatus, setInputStatus } =
     useContext(AppContext);
-  const { values, handleChange, errors, isValid } = useFormWithValidation();
+  const { values, handleChange, isValid } = useFormWithValidation();
 
   function handleInputChange(e) {
     setErrorMessage("");
@@ -75,6 +75,7 @@ function Profile({
                 type="submit"
                 onClick={handleSubmit}
                 form="editProfile"
+                disabled={!isValid}
               >
                 Сохранить
               </button>
@@ -95,7 +96,6 @@ function Profile({
                 type="button"
                 className="profile__logout-btn profile__btn"
                 onClick={handleSignOut}
-                disabled={!isValid}
               >
                 Выйти из аккаунта
               </button>

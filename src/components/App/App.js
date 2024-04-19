@@ -45,13 +45,13 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-    if (localStorage.getItem("userId")) {
+    if (JSON.parse(localStorage.getItem("isLoggedIn"))) {
       let userId = localStorage.getItem("userId");
       checkToken(userId)
         .then((res) => {
+          setLoggedIn(true);
           setUserEmail(res.email);
           setUserName(res.name);
-          setLoggedIn(true);
           navigate("/", { replace: true });
         })
         .catch((err) => {
