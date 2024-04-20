@@ -71,6 +71,9 @@ function App() {
           localStorage.setItem("isLoggedIn", JSON.stringify(true));
           setCurrentUser(res);
           setLoggedIn(true);
+          moviesApi.getSavedMovies().then((res)=> {
+            setSavedMovies(res);
+          })
         }
       })
       .catch((err) => {
@@ -136,6 +139,7 @@ function App() {
         setLoggedIn(false);
         setCurrentUser({});
         navigate("/", { replace: true });
+        setSavedMovies([]);
       })
       .catch((err) => {
         console.log(err);
