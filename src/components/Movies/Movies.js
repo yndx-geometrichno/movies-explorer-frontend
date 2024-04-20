@@ -17,18 +17,54 @@ function Movies({ movies, onMovieLike, onMovieDelete, ...props }) {
   const [searchValue, setSearchValue] = useState(
     localStorage.getItem("searchValue") || ""
   );
-  const [moviesResult, setMoviesResult] = useState(JSON.parse(localStorage.getItem("moviesResult")) || []);
+  const [moviesResult, setMoviesResult] = useState(
+    JSON.parse(localStorage.getItem("moviesResult")) || []
+  );
   const [beatFilms, setBeatFilms] = useState([]);
   const [searchError, setSearchError] = useState("");
 
   useEffect(() => {
-    if (beatFilms.length > 0) {
-      setMoviesResult(filterMovies(moviesResult, searchValue, isChecked));
+    const fetchData = async () => {
+      try {
+        setMoviesLoading(true);
+        const beatMoviesResponse = await mainApi.getBeatMovies();
+        setBeatFilms(beatMoviesResponse);
+        setMoviesResult(
+          filterMovies(beatMoviesResponse, searchValue, isChecked)
+        );
+        settingToStorage();
+        setMoviesLoading(false);
+        if (moviesResult.length < 1) {
+          setSearchError(errorMessages.nothingIsFound);
+        }
+      } catch (err) {
+        console.error(err);
+        setSearchError(err);
+        setMoviesLoading(false);
+      }
+    };
+
+    if (beatFilms.length === 0 || moviesResult.length === 0) {
+      console.log("gettttt");
+      fetchData();
+    } else {
+      setMoviesResult(filterMovies(beatFilms, searchValue, isChecked));
+      settingToStorage();
       if (moviesResult.length < 1) {
         setSearchError(errorMessages.nothingIsFound);
       }
     }
   }, [isChecked]);
+
+  useEffect(() => {
+    settingToStorage();
+  }, [moviesResult]);
+
+  function settingToStorage() {
+    localStorage.setItem("shortFilms", JSON.stringify(isChecked));
+    localStorage.setItem("searchValue", searchValue);
+    localStorage.setItem("moviesResult", JSON.stringify(moviesResult));
+  }
 
   function handleSearchSubmit(e) {
     e.preventDefault();
@@ -37,22 +73,21 @@ function Movies({ movies, onMovieLike, onMovieDelete, ...props }) {
       return;
     }
     setSearchError("");
-    setMoviesLoading(true);
     if (beatFilms.length > 0) {
-      setMoviesResult(filterMovies(beatFilms, searchValue, isChecked));
-      localStorage.setItem("shortFilms", JSON.stringify(isChecked));
-      localStorage.setItem("searchValue", searchValue);
-      localStorage.setItem("moviesResult", JSON.stringify(moviesResult));
-      setMoviesLoading(false);
+      console.log("I'm setting from state");
+      setMoviesResult((prevState) =>
+        filterMovies(beatFilms, searchValue, isChecked)
+      );
+      settingToStorage();
     } else {
+      setMoviesLoading(true);
       mainApi
         .getBeatMovies()
         .then((res) => {
           setBeatFilms(res);
           setMoviesResult(filterMovies(beatFilms, searchValue, isChecked));
-          localStorage.setItem("shortFilms", JSON.stringify(isChecked));
-          localStorage.setItem("searchValue", searchValue);
-          localStorage.setItem("moviesResult", JSON.stringify(moviesResult));
+          console.log("I'm setting res from beatMovies");
+          settingToStorage();
           setMoviesLoading(false);
           if (moviesResult.length < 1) {
             setSearchError(errorMessages.nothingIsFound);
