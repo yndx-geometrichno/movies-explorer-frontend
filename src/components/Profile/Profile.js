@@ -7,15 +7,20 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { btnNames } from "../../constants/btnNames";
 
 function Profile({ onSignOut, onEditSubmit, successMessage }) {
-  const { errorMessage, setErrorMessage, inputStatus, setInputStatus } =
-    useContext(AppContext);
+  const {
+    errorMessage,
+    setErrorMessage,
+    inputStatus,
+    setInputStatus,
+    isInputDisabled,
+  } = useContext(AppContext);
   const { currentUser } = useContext(CurrentUserContext);
   const { values, handleChange, isValid } = useFormWithValidation();
   const [isDirty, setIsDirty] = useState(false);
 
   useEffect(() => {
     const isFormDirty = Object.keys(values).some(
-      key => values[key] !== currentUser[key]
+      (key) => values[key] !== currentUser[key]
     );
     setIsDirty(isFormDirty);
   }, [values, currentUser]);
@@ -95,7 +100,7 @@ function Profile({ onSignOut, onEditSubmit, successMessage }) {
                   type="submit"
                   onClick={handleSubmit}
                   form="editProfile"
-                  disabled={!isValid || !isDirty}
+                  disabled={!isValid || !isDirty || isInputDisabled}
                 >
                   {btnNames.save}
                 </button>

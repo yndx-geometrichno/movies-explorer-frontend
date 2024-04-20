@@ -29,6 +29,7 @@ function App() {
   const [savedMoviesId, setSavedMoviesId] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [isInputDisabled, setInputDisabled] = useState(false);
 
   const navigate = useNavigate();
 
@@ -64,6 +65,7 @@ function App() {
   }, [savedMovies]);
 
   function handleLogin({ email, password }) {
+    setInputDisabled(true);
     authorize(email, password)
       .then((res) => {
         if (res._id) {
@@ -82,10 +84,14 @@ function App() {
         } else if (err.status === 500) {
           setErrorMessage(errorMessages.serverError);
         } else setErrorMessage(errorMessages.wrongTokenError);
+      })
+      .finally(() => {
+        setInputDisabled(false);
       });
   }
 
   function onRegister({ name, email, password }) {
+    setInputDisabled(true);
     register(name, email, password)
       .then((res) => {
         if (!res.newUser) {
@@ -101,10 +107,14 @@ function App() {
         } else {
           setErrorMessage(errorMessages.signupError);
         }
+      })
+      .finally(() => {
+        setInputDisabled(false);
       });
   }
 
   function handleProfileSubmit({ email, name }) {
+    setInputDisabled(true);
     moviesApi
       .updateUserInfo(email, name)
       .then((res) => {
@@ -125,6 +135,9 @@ function App() {
           setErrorMessage(errorMessages.profileUpdateError);
         }
         setInputStatus(true);
+      })
+      .finally(() => {
+        setInputDisabled(false);
       });
   }
 
@@ -189,6 +202,8 @@ function App() {
         inputStatus,
         setInputStatus,
         savedMoviesId,
+        isInputDisabled,
+        setInputDisabled,
       }}
     >
       <CurrentUserContext.Provider value={{ currentUser }}>

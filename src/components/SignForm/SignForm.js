@@ -6,7 +6,8 @@ import useFormWithValidation from "../../utils/useFormWithValidation";
 import { placeholders } from "../../constants/placeholders";
 
 function SignForm({ header, buttonText, formType, children, onSubmit }) {
-  const { errorMessage, setErrorMessage } = useContext(AppContext);
+  const { errorMessage, setErrorMessage, isInputDisabled } =
+    useContext(AppContext);
   const { values, handleChange, errors, isValid } = useFormWithValidation();
 
   function handleInputChange(e) {
@@ -47,6 +48,7 @@ function SignForm({ header, buttonText, formType, children, onSubmit }) {
                 value={values.name || ""}
                 onChange={handleInputChange}
                 required
+                disabled={isInputDisabled}
               ></input>
               {errors.name ? (
                 <span className="sign__form-error sign__form-error_visible">
@@ -69,6 +71,7 @@ function SignForm({ header, buttonText, formType, children, onSubmit }) {
             value={values.email || ""}
             onChange={handleInputChange}
             required
+            disabled={isInputDisabled}
           ></input>
           {errors.email ? (
             <span className="sign__form-error sign__form-error_visible">
@@ -89,6 +92,7 @@ function SignForm({ header, buttonText, formType, children, onSubmit }) {
             value={values.password || ""}
             onChange={handleInputChange}
             required
+            disabled={isInputDisabled}
           ></input>
           {errors.password ? (
             <span className="sign__form-error sign__form-error_visible">
@@ -108,7 +112,7 @@ function SignForm({ header, buttonText, formType, children, onSubmit }) {
           type="submit"
           onClick={handleSubmit}
           form="signForm"
-          disabled={!isValid}
+          disabled={!isValid || isInputDisabled}
         >
           {buttonText}
         </button>
