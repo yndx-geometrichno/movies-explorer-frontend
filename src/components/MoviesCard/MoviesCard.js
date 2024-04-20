@@ -13,13 +13,13 @@ function MoviesCard({
   onMovieLike,
   onMovieDelete,
   action,
-  isMovieLiked
+  isMovieLiked,
 }) {
   const stringDuration = normalizeDuration(duration);
 
   const currentUser = useContext(CurrentUserContext);
   // const isOwn = movie.owner === currentUser._id;
-  const [ isLiked, setIsLiked ] = useState(isMovieLiked);
+  const [isLiked, setIsLiked] = useState(isMovieLiked);
   if (movie.owner && movie.owner.includes(currentUser._id)) {
     setIsLiked(true);
   }
@@ -30,7 +30,7 @@ function MoviesCard({
 
   function handleLikeClick() {
     onMovieLike(movie);
-    setIsLiked(true)
+    setIsLiked(true);
   }
 
   function handleDeleteClick() {
@@ -40,7 +40,7 @@ function MoviesCard({
 
   return (
     <article className="movie">
-      <Link to={trailerLink} target="_blank" >
+      <Link to={trailerLink} target="_blank">
         <img className="movie__img" src={link} alt={name} />
       </Link>
       <div className="movie__info">

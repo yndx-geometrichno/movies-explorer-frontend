@@ -20,7 +20,7 @@ function Profile({ onSignOut, onEditSubmit, successMessage }) {
   function handleSubmit(e) {
     e.preventDefault();
     if (Object.keys(values).length === 0) {
-      setErrorMessage("")
+      setErrorMessage("");
     }
     if (!values.email) {
       values.email = currentUser.email;

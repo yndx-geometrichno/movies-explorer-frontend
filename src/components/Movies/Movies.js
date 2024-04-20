@@ -38,14 +38,13 @@ function Movies({ movies, onMovieLike, onMovieDelete, ...props }) {
           setSearchError(errorMessages.nothingIsFound);
         }
       } catch (err) {
-        console.error(err);
+        console.log(err);
         setSearchError(err);
         setMoviesLoading(false);
       }
     };
 
     if (beatFilms.length === 0 || moviesResult.length === 0) {
-      console.log("gettttt");
       fetchData();
     } else {
       setMoviesResult(filterMovies(beatFilms, searchValue, isChecked));
@@ -74,10 +73,7 @@ function Movies({ movies, onMovieLike, onMovieDelete, ...props }) {
     }
     setSearchError("");
     if (beatFilms.length > 0) {
-      console.log("I'm setting from state");
-      setMoviesResult((prevState) =>
-        filterMovies(beatFilms, searchValue, isChecked)
-      );
+      setMoviesResult(filterMovies(beatFilms, searchValue, isChecked));
       settingToStorage();
     } else {
       setMoviesLoading(true);
@@ -86,7 +82,6 @@ function Movies({ movies, onMovieLike, onMovieDelete, ...props }) {
         .then((res) => {
           setBeatFilms(res);
           setMoviesResult(filterMovies(beatFilms, searchValue, isChecked));
-          console.log("I'm setting res from beatMovies");
           settingToStorage();
           setMoviesLoading(false);
           if (moviesResult.length < 1) {

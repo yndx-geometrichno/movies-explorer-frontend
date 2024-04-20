@@ -56,7 +56,7 @@ function SignForm({ header, buttonText, formType, children, onSubmit }) {
             </>
           )}
           <label className="sign__form-label" htmlFor="email">
-          {placeholders.email}
+            {placeholders.email}
           </label>
           <input
             id="email"
@@ -76,7 +76,7 @@ function SignForm({ header, buttonText, formType, children, onSubmit }) {
             </span>
           ) : null}
           <label className="sign__form-label" htmlFor="password">
-          {placeholders.password}
+            {placeholders.password}
           </label>
           <input
             id="password"

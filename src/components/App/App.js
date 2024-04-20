@@ -28,7 +28,7 @@ function App() {
   const [inputStatus, setInputStatus] = useState(false);
   const [savedMoviesId, setSavedMoviesId] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("")
+  const [successMessage, setSuccessMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -118,12 +118,13 @@ function App() {
           setErrorMessage(errorMessages.profileUpdateError);
         }
         setInputStatus(true);
-      }).finally(() => {
+      })
+      .finally(() => {
         setTimeout(() => {
           setSuccessMessage("");
           setInputStatus(false);
         }, 3000);
-      })
+      });
   }
 
   function onSignOut() {
