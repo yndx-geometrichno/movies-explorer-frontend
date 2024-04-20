@@ -64,6 +64,12 @@ function MoviesCardList(props) {
     }
   };
 
+  useEffect(() => {
+    if (visibleMovies >= movies.length) {
+      setButtonVisible(false);
+    } else setButtonVisible(true);
+  }, [visibleMovies, movies]);
+
   return (
     <section className="movies">
       {isMoviesLoading ? (
