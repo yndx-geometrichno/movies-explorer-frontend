@@ -108,6 +108,10 @@ function App() {
         setCurrentUser(res);
         setSuccessMessage(successMessages.updateProfileSuccess);
         setErrorMessage("");
+        setTimeout(() => {
+          setSuccessMessage("");
+          setInputStatus(false);
+        }, 3000);
       })
       .catch((err) => {
         if (err.status === 409) {
@@ -119,12 +123,6 @@ function App() {
         }
         setInputStatus(true);
       })
-      .finally(() => {
-        setTimeout(() => {
-          setSuccessMessage("");
-          setInputStatus(false);
-        }, 3000);
-      });
   }
 
   function onSignOut() {
