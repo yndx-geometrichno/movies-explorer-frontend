@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Profile.css";
 import Header from "../Header/Header";
 import { AppContext } from "../../contexts/AppContext";
@@ -11,6 +11,14 @@ function Profile({ onSignOut, onEditSubmit, successMessage }) {
     useContext(AppContext);
   const { currentUser } = useContext(CurrentUserContext);
   const { values, handleChange, isValid } = useFormWithValidation();
+  const [isDirty, setIsDirty] = useState(false);
+
+  useEffect(() => {
+    const isFormDirty = Object.keys(values).some(
+      key => values[key] !== currentUser[key]
+    );
+    setIsDirty(isFormDirty);
+  }, [values, currentUser]);
 
   function handleInputChange(e) {
     setErrorMessage("");
@@ -87,7 +95,7 @@ function Profile({ onSignOut, onEditSubmit, successMessage }) {
                   type="submit"
                   onClick={handleSubmit}
                   form="editProfile"
-                  disabled={!isValid}
+                  disabled={!isValid || !isDirty}
                 >
                   {btnNames.save}
                 </button>

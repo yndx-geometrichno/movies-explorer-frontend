@@ -110,6 +110,13 @@
   background-color: var(--brightblue);
 }
 
+.profile__save-btn:disabled {
+  cursor: default;
+  opacity: 1;
+  background-color: #f8f8f8;
+  color: #c2c2c2;
+}
+
 .profile__edit-btn {
   color: #fff;
   font-weight: 400;
