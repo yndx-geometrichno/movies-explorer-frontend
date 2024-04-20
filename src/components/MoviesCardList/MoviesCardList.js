@@ -14,11 +14,11 @@ function MoviesCardList(props) {
     amountOfMoviesToLoadDesktop,
     amountOfMoviesToLoadMobile,
     mainApiUrl,
+    desktopScreenSize,
   } = moviesListValues;
 
   const [movies, setMovies] = useState([]);
   const [isButtonVisible, setButtonVisible] = useState(true);
-  const [cardsPerPage, setCardsPerPage] = useState(defaultMoviesPerPage);
   const [visibleMovies, setVisibleMovies] = useState([]);
   const [visibleCardsCount, setVisibleCardsCount] = useState(
     getAmountOfCards()
@@ -35,7 +35,7 @@ function MoviesCardList(props) {
   useEffect(() => {
     setMovies(props.movies || []);
     setVisibleMovies(props.movies.slice(0, getAmountOfCards()));
-  }, []);
+  }, [props.movies]);
 
   const handleResize = () => {
     clearTimeout(resizeTimer);
@@ -45,7 +45,6 @@ function MoviesCardList(props) {
   let resizeTimer;
 
   const updateCardsPerPage = () => {
-    setCardsPerPage(defaultMoviesPerPage);
     setVisibleCardsCount(getAmountOfCards());
     setVisibleMovies(props.movies.slice(0, getAmountOfCards()));
   };
@@ -54,12 +53,10 @@ function MoviesCardList(props) {
     let amountOfCardsToLoad;
     const screenWidth = window.innerWidth;
 
-    if (screenWidth >= 1106) {
-      amountOfCardsToLoad = 3;
-    } else if (screenWidth >= 768) {
-      amountOfCardsToLoad = 2;
+    if (screenWidth >= desktopScreenSize) {
+      amountOfCardsToLoad = amountOfMoviesToLoadDesktop;
     } else {
-      amountOfCardsToLoad = 2;
+      amountOfCardsToLoad = amountOfMoviesToLoadMobile;
     }
 
     const newVisibleCount = visibleCardsCount + amountOfCardsToLoad;
