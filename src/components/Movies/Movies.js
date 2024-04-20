@@ -57,6 +57,9 @@ function Movies({ movies, onMovieLike, onMovieDelete, ...props }) {
 
   useEffect(() => {
     settingToStorage();
+    if (searchValue && moviesResult < 1) {
+      setSearchError(errorMessages.nothingIsFound);
+    } else setSearchError("");
   }, [moviesResult]);
 
   function settingToStorage() {
@@ -113,6 +116,7 @@ function Movies({ movies, onMovieLike, onMovieDelete, ...props }) {
             movies={moviesResult}
             onMovieLike={onMovieLike}
             onMovieDelete={onMovieDelete}
+            searchValue={searchValue}
           />
         </SearchForm>
       </main>
