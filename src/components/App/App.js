@@ -137,6 +137,7 @@ function App() {
         localStorage.removeItem("moviesResult");
         setLoggedIn(false);
         setCurrentUser({});
+        navigate("/", { replace: true });
       })
       .catch((err) => {
         console.log(err);
