@@ -45,20 +45,26 @@ function MoviesCardList(props) {
   let resizeTimer;
 
   const updateCardsPerPage = () => {
-    setCardsPerPage(getAmountOfCards());
+    setCardsPerPage(defaultMoviesPerPage);
+    setVisibleCardsCount(getAmountOfCards());
+    setVisibleMovies(props.movies.slice(0, getAmountOfCards()));
   };
 
   const handleLoadMoreClick = () => {
-    let newVisibleCount;
-    if (cardsPerPage === defaultMoviesPerPage) {
-      newVisibleCount = visibleCardsCount + amountOfMoviesToLoadDesktop;
-      setVisibleMovies(movies.slice(0, newVisibleCount));
-      setVisibleCardsCount(newVisibleCount);
+    let amountOfCardsToLoad;
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth >= 1106) {
+      amountOfCardsToLoad = 3;
+    } else if (screenWidth >= 768) {
+      amountOfCardsToLoad = 2;
     } else {
-      newVisibleCount = visibleCardsCount + amountOfMoviesToLoadMobile;
-      setVisibleMovies(movies.slice(0, newVisibleCount));
-      setVisibleCardsCount(newVisibleCount);
+      amountOfCardsToLoad = 2;
     }
+
+    const newVisibleCount = visibleCardsCount + amountOfCardsToLoad;
+    setVisibleMovies(movies.slice(0, newVisibleCount));
+    setVisibleCardsCount(newVisibleCount);
     if (newVisibleCount >= movies.length) {
       setButtonVisible(false);
     }
