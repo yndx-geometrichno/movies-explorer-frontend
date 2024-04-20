@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import SignForm from "../SignForm/SignForm";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { btnNames } from "../../constants/btnNames";
+import { AppContext } from "../../contexts/AppContext";
 
 function Login({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const appContext = useContext(AppContext);
+
   function handleSubmit(values) {
     onLogin(values);
   }
 
-  return (
+  return appContext.isLoggedIn ? (
     <main className="page__container">
       <SignForm
         header="Рады видеть!"
@@ -31,6 +34,8 @@ function Login({ onLogin }) {
         </p>
       </SignForm>
     </main>
+  ) : (
+    <Navigate to="/movies" replace />
   );
 }
 

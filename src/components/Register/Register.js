@@ -1,13 +1,17 @@
+import { useContext } from "react";
 import { btnNames } from "../../constants/btnNames";
+import { AppContext } from "../../contexts/AppContext";
 import SignForm from "../SignForm/SignForm";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 function Register({ onRegister }) {
+  const appContext = useContext(AppContext);
+
   function handleSubmit(values) {
     onRegister(values);
   }
 
-  return (
+  return appContext.isLoggedIn ? (
     <main className="page__container">
       <SignForm
         header="Добро пожаловать!"
@@ -23,6 +27,8 @@ function Register({ onRegister }) {
         </p>
       </SignForm>
     </main>
+  ) : (
+    <Navigate to="/movies" replace />
   );
 }
 
