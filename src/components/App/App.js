@@ -71,9 +71,9 @@ function App() {
           localStorage.setItem("isLoggedIn", JSON.stringify(true));
           setCurrentUser(res);
           setLoggedIn(true);
-          moviesApi.getSavedMovies().then((res)=> {
+          moviesApi.getSavedMovies().then((res) => {
             setSavedMovies(res);
-          })
+          });
         }
       })
       .catch((err) => {
@@ -125,7 +125,7 @@ function App() {
           setErrorMessage(errorMessages.profileUpdateError);
         }
         setInputStatus(true);
-      })
+      });
   }
 
   function onSignOut() {

@@ -52,7 +52,7 @@ function Profile({ onSignOut, onEditSubmit, successMessage }) {
               placeholder="Имя"
               form="profileForm"
               value={values.name || currentUser.name}
-              disabled={inputStatus === true ? "" : "disabled"}
+              disabled={inputStatus ? "" : "disabled"}
               onChange={handleInputChange}
               required
             />
@@ -67,14 +67,14 @@ function Profile({ onSignOut, onEditSubmit, successMessage }) {
               form="profileForm"
               placeholder="Email"
               value={values.email || currentUser.email}
-              disabled={inputStatus === true ? "" : "disabled"}
+              disabled={inputStatus ? "" : "disabled"}
               onChange={handleInputChange}
               required
             />
           </div>
         </form>
         <div className="profile__btn-container">
-          {inputStatus === true ? (
+          {inputStatus ? (
             <>
               {errorMessage ? (
                 <div className="profile__error">{errorMessage}</div>
