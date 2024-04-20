@@ -14,7 +14,7 @@ function Login({ onLogin }) {
     onLogin(values);
   }
 
-  return appContext.isLoggedIn ? (
+  return !appContext.isLoggedIn ? (
     <main className="page__container">
       <SignForm
         header="Рады видеть!"

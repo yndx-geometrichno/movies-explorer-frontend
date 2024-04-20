@@ -11,7 +11,7 @@ function Register({ onRegister }) {
     onRegister(values);
   }
 
-  return appContext.isLoggedIn ? (
+  return !appContext.isLoggedIn ? (
     <main className="page__container">
       <SignForm
         header="Добро пожаловать!"
